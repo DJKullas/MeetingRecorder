@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+var Sqlite = require("nativescript-sqlite");
 
 @Component({
     selector: "ns-app",
