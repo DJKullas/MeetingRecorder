@@ -15,6 +15,7 @@ export class AddStudentComponent implements OnInit {
 
   async onButtonPress() {
     var students = await this.dataService.getStudents();
+    console.log(students[0].firstname);
   }
 
   ngOnInit(): void {

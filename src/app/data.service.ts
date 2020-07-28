@@ -53,7 +53,7 @@ export class DataService {
 
     public async createTeachersTable(): Promise<any> {
         this.database.execSQL("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, title TEXT)").then(id => {
-            console.log("Created Teachers Table", id);
+            console.log("Created Teachers Table or it was already here", id);
         }), error => {
             console.log("Error creating teachers table", error);
         };
@@ -61,7 +61,7 @@ export class DataService {
 
     public async createMeetingsTable(): Promise<any> {
         this.database.execSQL("CREATE TABLE IF NOT EXISTS meetings (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME, StudentID INTEGER, TeacherID INTEGER, FOREIGN KEY (StudentID) REFERENCES students(id), FOREIGN KEY (TeacherID) REFERENCES teachers(id))").then(id => {
-            console.log("Created Meetings Table", id);
+            console.log("Created Meetings Table or it was already here", id);
         }), error => {
             console.log("Error creating meetings table", error);
         };
@@ -72,6 +72,7 @@ export class DataService {
         await this.database.all("SELECT * FROM students").then(rows => {
             for(var row in rows) {
                 this.students.push({
+                    "id": rows[row][0],
                     "firstname": rows[row][1],
                     "lastname": rows[row][2],
                     "grade": rows[row][3],
@@ -89,6 +90,7 @@ export class DataService {
         await this.database.all("SELECT * FROM teachers").then(rows => {
             for(var row in rows) {
                 this.teachers.push({
+                    "id": rows[row][0],
                     "firstname": rows[row][1],
                     "lastname": rows[row][2],
                     "title": rows[row][3],
@@ -106,6 +108,7 @@ export class DataService {
         await this.database.all("SELECT * FROM meetings").then(rows => {
             for(var row in rows) {
                 this.meetings.push({
+                    "id": rows[row][0],
                     "date": rows[row][1],
                     "studentID": rows[row][2],
                     "teacherID": rows[row][3],
