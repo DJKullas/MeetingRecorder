@@ -9,10 +9,6 @@ import { DataService } from '../data.service';
 export class AddMeetingComponent implements OnInit {
 
   students: Array<any>;
-  test: Array<any> = [{firstname: "abc", lastname: "def"},
-  {firstname: "jfid", lastname: "fdsf"}];
-  abc: Array<string> = ["one abc0", "two fdk"];
-  studentNamesAndIds: Array<string>;
 
   constructor(private dataService: DataService) { }
 
@@ -27,19 +23,14 @@ export class AddMeetingComponent implements OnInit {
   }
 
   // make listpicker show names but return id
-  async getStudentsAndNames() {
+  async getStudents() {
     this.students = [];
-    this.studentNamesAndIds = [];
     this.students = await this.dataService.getStudents();
-
-    for (var i = 0; i < this.students.length; i+= 1) {
-      this.studentNamesAndIds.push(`Name: ${this.students[i].firstname} ${this.students[i].lastname}, Grade: ${this.students[i].grade}, Id: ${this.students[i].id}`);
-    }
   }
 
   ngOnInit(): void {
     this.createMeetingsTable();
-    this.getStudentsAndNames();
+    this.getStudents();
   }
 
 }
