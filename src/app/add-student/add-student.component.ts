@@ -13,19 +13,8 @@ export class AddStudentComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
-  async onButtdonPress() {
-    var abc = await this.dataService.getString();
-    console.log("abc: " + abc);
-  }
-
   async onButtonPress() {
     var students = await this.dataService.getStudents();
-
-    console.log(students[0].firstname);
-
-    // for (var student in students) {
-    //   console.log(student);
-    // }
   }
 
   ngOnInit(): void {
