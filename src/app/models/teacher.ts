@@ -1,4 +1,4 @@
-class Teacher  {
+export class Teacher  {
     private _id: number;
     private _firstName: string;
     private _lastName: string;

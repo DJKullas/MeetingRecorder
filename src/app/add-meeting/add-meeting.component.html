@@ -1,3 +1,29 @@
-<ListPicker 
-    [items]="students" textfield="firstname">
-</ListPicker>
+
+<StackLayout class="form">
+    <StackLayout>
+        <Label class="page-title" text="Create a Meeting" textAlignment="center"></Label>
+    </StackLayout>
+    
+    <StackLayout class="input-field">
+        <Label class="input-title" text="Select Student" textAlignment="center"></Label>
+        <ListPicker 
+        class="input list-picker" [items]="students" textfield="fullName" valuefield="id" (selectedIndexChange)="onSelectedStudentChanged($event)">
+        </ListPicker>
+    </StackLayout>
+  
+    <StackLayout class="input-field">
+        <Label class="input-title" text="Select Teacher" textAlignment="center"></Label>
+        <ListPicker 
+        class="input list-picker" [items]="teachers" textfield="fullName" valuefield="id" (selectedIndexChange)="onSelectedTeacherChanged($event)">
+        </ListPicker>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+        <Label class="input-title" text="Select Date" textAlignment="center"></Label>
+        <DatePicker class="date-picker" (loaded)="onDateLoaded($event)" (dateChange)="onDateChanged($event)" ></DatePicker>
+    </StackLayout>
+
+    <StackLayout>
+        <Button class="btn btn-primary" text="Create" (tap)="createMeeting()"></Button>
+    </StackLayout>
+  </StackLayout>

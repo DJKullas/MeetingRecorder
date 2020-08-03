@@ -1,4 +1,7 @@
-class Meeting {
+import { Student } from './student';
+import { Teacher } from './teacher';
+
+export class Meeting {
     private _id: number;
     private _date: Date;
     private _student: Student;

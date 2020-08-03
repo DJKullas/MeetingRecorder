@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Meeting } from '../models/meeting';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'ns-show-meetings',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowMeetingsComponent implements OnInit {
 
-  constructor() { }
+  meetings: Array<Meeting>;
+
+  constructor(private dataService: DataService) { }
+
+async getMeetings() {
+  this.meetings = await this.dataService.getMeetings();
+}
 
   ngOnInit(): void {
+    this.getMeetings();
   }
-
 }

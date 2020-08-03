@@ -13,7 +13,7 @@ export class AddTeacherComponent implements OnInit {
   async onButtonPress() {
     await this.dataService.insertTeacher();
     var teachers = await this.dataService.getTeachers();
-    console.log(teachers);
+    
   }
 
   async createTeachersTable() {

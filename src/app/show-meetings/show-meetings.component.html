@@ -1,1 +1,11 @@
-<Button text="show-meetings works!" class="btn btn-primary"></Button>
+<Label text="gfdfdddfgd"></Label>
+<ScrollView>
+    <StackLayout>
+        <ListView height="150" [items]="meetings">
+            <ng-template let-meeting="item" let-i="index">
+                <Label [text]="meeting.student.id"></Label>
+
+            </ng-template>
+        </ListView>
+    </StackLayout>
+</ScrollView>
