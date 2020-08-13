@@ -30,8 +30,8 @@ export class DataService {
     }
 
     // add parameters for values later
-    public insertStudent() {
-        this.database.execSQL("INSERT INTO students (firstname, lastname, grade) VALUES (?, ?, ?)", ["Sam", "Samuels", 4]).then(id => {
+    public insertStudent(firstName: string, lastName: string, grade: number) {
+        this.database.execSQL("INSERT INTO students (firstname, lastname, grade) VALUES (?, ?, ?)", [firstName, lastName, grade]).then(id => {
             
         }, error => {
             

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { NewStudent } from '../models/new-student';
 
 @Component({
   selector: 'ns-add-student',
@@ -8,14 +9,17 @@ import { DataService } from '../data.service';
 })
 export class AddStudentComponent implements OnInit {
 
-  students: Array<any>;
-  testStudent: Array<any>;
+  public student: NewStudent;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) { 
+    this.student = new NewStudent();
+  }
 
-  async onButtonPress() {
-    var students = await this.dataService.getStudents();
-    
+  // ensure grade is working properly
+  async addStudent() {
+    console.log("a: " + this.student.firstName + " a")
+    await this.dataService.insertStudent(this.student.firstName, this.student.lastName, this.student.grade);
+
   }
 
   ngOnInit(): void {
