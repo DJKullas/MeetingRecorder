@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AddTeacherRoutingModule } from './add-teacher-routing.module';
-import { NativeScriptCommonModule } from '@nativescript/angular';
+import { NativeScriptCommonModule, NativeScriptFormsModule } from '@nativescript/angular';
 import { AddTeacherComponent } from './add-teacher.component';
 
 
@@ -9,7 +9,8 @@ import { AddTeacherComponent } from './add-teacher.component';
   declarations: [AddTeacherComponent],
   imports: [
     AddTeacherRoutingModule,
-    NativeScriptCommonModule
+    NativeScriptCommonModule,
+    NativeScriptFormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

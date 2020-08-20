@@ -5,7 +5,7 @@ import { Teacher } from '../models/teacher';
 import { EventData } from 'tns-core-modules/ui/page';
 import { ListPicker } from "tns-core-modules/ui/list-picker";
 import { DatePicker } from 'tns-core-modules/ui/date-picker';
-import { ShowMeetingsComponent } from '../show-meetings/show-meetings.component';
+import { NewMeeting } from '../models/new-meeting';
 
 @Component({
   selector: 'ns-add-meeting',
@@ -16,11 +16,13 @@ export class AddMeetingComponent implements OnInit {
 
   students: Array<Student>;
   teachers: Array<Teacher>;
-  selectedStudentId: number;
-  selectedTeacherId: number;
-  selectedDate: Date;
+  meeting: NewMeeting;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    this.meeting = new NewMeeting();
+    this.students = dataService.students;
+    this.teachers = dataService.teachers;
+   }
 
   async createMeetingsTable() {
     await this.dataService.createMeetingsTable();
@@ -28,37 +30,47 @@ export class AddMeetingComponent implements OnInit {
 
   // make listpicker show names but return id
   async getStudents() {
-    this.students = [];
-    this.students = await this.dataService.getStudents();
+    // this.students = [];
+    // this.students = await this.dataService.getStudents();
+
+    console.log(this.students);
+    await this.dataService.getStudents();
+    console.log(this.students);
   }
 
   async getTeachers() {
-    this.teachers = [];
-    this.teachers = await this.dataService.getTeachers();
+    await this.dataService.getTeachers();
   }
 
   public onSelectedStudentChanged(args: EventData) {
     const picker = <ListPicker>args.object;
-    this.selectedStudentId = this.students[picker.selectedIndex].id;
+    this.meeting.studentId = this.students[picker.selectedIndex].id;
     
 }
 
 public onSelectedTeacherChanged(args: EventData) {
   const picker = <ListPicker>args.object;
-  this.selectedTeacherId = this.teachers[picker.selectedIndex].id;
+  this.meeting.teacherId = this.teachers[picker.selectedIndex].id;
 }
 
 public onDateChanged(args) {
-  this.selectedDate = args.value;
+  this.meeting.date = args.value;
 }
 
 public onDateLoaded(args) {
   const picker = <DatePicker>args.object;
-  this.selectedDate = picker.date;
+  this.meeting.date = picker.date;
 }
 
   async createMeeting() {
-    await this.dataService.insertMeeting(this.selectedDate, this.selectedStudentId, this.selectedTeacherId);
+    await this.dataService.insertMeeting(this.meeting);
+    let options = {
+      title: "Meeting Created",
+      message: "Your meeting has been created",
+      okButtonText: "OK"
+  };
+  
+    alert(options);
   }
 
   async deleteMeetingsTable() {
@@ -66,10 +78,12 @@ public onDateLoaded(args) {
   }
 
   ngOnInit(): void {
-    
     this.createMeetingsTable();
-    this.getStudents();
+    this.dataService.sharedStudents.subscribe(students => this.students = students);    
+    this.dataService.sharedTeachers.subscribe(teachers => this.teachers = teachers);
+    
     this.getTeachers();
+    this.dataService.getStudents();
   }
 
 }

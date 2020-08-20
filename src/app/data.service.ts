@@ -3,7 +3,10 @@ import { Student } from './models/student';
 import { Teacher } from './models/teacher';
 import { Meeting } from './models/meeting';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { NewStudent } from './models/new-student';
+import { NewTeacher } from './models/new-teacher';
+import { NewMeeting } from './models/new-meeting';
 
 var Sqlite = require("nativescript-sqlite");
 
@@ -17,7 +20,17 @@ export class DataService {
     teachers: Array<Teacher> = [];
     meetings: Array<Meeting> = [];
 
+    studentListChange: Subject<Array<Student>> = new Subject<Array<Student>>();
+    teacherListChange: Subject<Array<Teacher>> = new Subject<Array<Teacher>>();
+    meetingListChange: Subject<Array<Meeting>> = new Subject<Array<Meeting>>();
+
+    
+    sharedStudents = this.studentListChange.asObservable();
+    sharedTeachers = this.teacherListChange.asObservable();
+    sharedMeetings = this.meetingListChange.asObservable();
+
     public constructor() {
+
         (new Sqlite("my.db")).then(db => {
             db.execSQL("CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, grade INTEGER)").then(id => {
                 this.database = db;
@@ -30,28 +43,25 @@ export class DataService {
     }
 
     // add parameters for values later
-    public insertStudent(firstName: string, lastName: string, grade: number) {
-        this.database.execSQL("INSERT INTO students (firstname, lastname, grade) VALUES (?, ?, ?)", [firstName, lastName, grade]).then(id => {
-            
+    public insertStudent(student: NewStudent) {
+        this.database.execSQL("INSERT INTO students (firstname, lastname, grade) VALUES (?, ?, ?)", [student.firstName, student.lastName, student.grade]).then(id => {
+            this.getStudents();
         }, error => {
             
         });
     }
 
-    public insertTeacher() {
-        this.database.execSQL("INSERT INTO teachers (firstname, lastname, title) VALUES (?, ?, ?)", ["Teachy", "McTeacher", "Science"]).then(id => {
-            
+    public insertTeacher(teacher: NewTeacher) {
+        this.database.execSQL("INSERT INTO teachers (firstname, lastname, title) VALUES (?, ?, ?)", [teacher.firstName, teacher.lastName, teacher.title]).then(id => {
+            this.getTeachers();
         }, error => {
             
         });
     }
 
-    public insertMeeting(date: Date, studentId: number, teacherId: number) {
-        
-        
-        
-        this.database.execSQL("INSERT INTO meetings (date, studentID, teacherID) VALUES (?, ?, ?)", [date, studentId, teacherId]).then(id => {
-            
+    public insertMeeting(meeting: NewMeeting) {
+        this.database.execSQL("INSERT INTO meetings (date, studentID, teacherID) VALUES (?, ?, ?)", [meeting.date, meeting.studentId, meeting.teacherId]).then(id => {
+            this.getMeetings();
         }, error => {
             
         });
@@ -67,7 +77,7 @@ export class DataService {
 
     public async createTeachersTable(): Promise<any> {
         this.database.execSQL("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, title TEXT)").then(id => {
-            
+
         }), error => {
             
         };
@@ -91,6 +101,7 @@ export class DataService {
             
         });
 
+        this.studentListChange.next(this.students);
         return this.students;
     }
 
@@ -104,7 +115,7 @@ export class DataService {
             
         });
 
-        
+        this.teacherListChange.next(this.teachers);
         return this.teachers;
     }
 
@@ -129,25 +140,32 @@ export class DataService {
 
     public async getMeetings(): Promise<Meeting[]> {
         this.meetings = [];
+        console.log("IN")
         await this.database.all("SELECT * FROM meetings").then(async rows => {
-            
+            console.log("FDSGDSGSDUHGUISHGUOs")
             for(var row in rows) {
+    
                 var student: Student;
                 var teacher: Teacher;
 
-                
+                console.log("Before awaits");
                 student = await this.getStudent(rows[row][2]);
                 teacher = await this.getTeacher(rows[row][3]);
+                console.log("After awaits")
                 
                 
 
                 this.meetings.push(new Meeting(rows[row][0], rows[row][1], student, teacher));
             }
+            console.log("MORE")
         }, error => {
-            
+            console.log("ERROR")
         });
 
+        console.log("DFSFDDSF")
+        console.log("METINGS" + this.meetings)
         
+        this.meetingListChange.next(this.meetings);
         return this.meetings;
     }
 }

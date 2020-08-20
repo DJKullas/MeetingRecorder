@@ -17,9 +17,17 @@ export class AddStudentComponent implements OnInit {
 
   // ensure grade is working properly
   async addStudent() {
-    console.log("a: " + this.student.firstName + " a")
-    await this.dataService.insertStudent(this.student.firstName, this.student.lastName, this.student.grade);
+    await this.dataService.insertStudent(this.student);
 
+    let options = {
+      title: "Student Added",
+      message: "Your student has been added",
+      okButtonText: "OK"
+  };
+  
+    alert(options);
+
+    this.student = new NewStudent();
   }
 
   ngOnInit(): void {

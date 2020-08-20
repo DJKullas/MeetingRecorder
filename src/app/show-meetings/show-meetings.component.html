@@ -1,10 +1,13 @@
-<Label text="gfdfdddfgd"></Label>
 <ScrollView>
-    <StackLayout>
-        <ListView height="150" [items]="meetings">
+    <StackLayout height="100%">
+        <Label textAlignment="center" class="page-title" text="Meetings"></Label>
+        <ListView height="100%" [items]="meetings">
             <ng-template let-meeting="item" let-i="index">
-                <Label [text]="meeting.student.id"></Label>
-
+                <StackLayout orientation="horizontal">
+                    <Label width="33%" [text]="meeting.student.fullName"></Label>
+                    <Label width="33%" [text]="meeting.teacher.fullName"></Label>
+                    <Label width="33%" [text]="meeting.date"></Label>
+                </StackLayout>
             </ng-template>
         </ListView>
     </StackLayout>

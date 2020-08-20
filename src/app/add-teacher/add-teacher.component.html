@@ -1,1 +1,40 @@
-<Button text="add-teacher test works!" class="btn btn-primary" (tap)="onButtonPress()"></Button>
+
+<StackLayout class="form">
+    <StackLayout>
+        <Label class="page-title" text="Add a Teacher" textAlignment="center"></Label>
+    </StackLayout>
+    
+    <StackLayout class="input-field">
+        <Label class="input-title" text="First Name" textAlignment="center"></Label>
+        <TextField hint="Enter First Name" 
+           [(ngModel)]="teacher.firstName" 
+           secure="false"
+           returnKeyType="next" 
+           autocorrect="false">
+        </TextField>
+    </StackLayout>
+  
+    <StackLayout class="input-field">
+        <Label class="input-title" text="Last Name" textAlignment="center"></Label>
+        <TextField hint="Enter Last Name" 
+           [(ngModel)]="teacher.lastName"
+           secure="false"
+           returnKeyType="next" 
+           autocorrect="false">
+        </TextField>
+    </StackLayout>
+
+    <StackLayout class="input-field">
+        <Label class="input-title" text="Title" textAlignment="center"></Label>
+        <TextField hint="Enter Title" 
+           [(ngModel)]="teacher.title"
+           secure="false"
+           returnKeyType="done" 
+           autocorrect="false">
+        </TextField>
+    </StackLayout>
+
+    <StackLayout>
+        <Button class="btn btn-primary" text="Add Teacher" (tap)="addTeacher()"></Button>
+    </StackLayout>
+  </StackLayout>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { NewTeacher } from '../models/new-teacher';
 
 @Component({
   selector: 'ns-add-teacher',
@@ -8,13 +9,25 @@ import { DataService } from '../data.service';
 })
 export class AddTeacherComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  teacher: NewTeacher;
 
-  async onButtonPress() {
-    await this.dataService.insertTeacher();
-    var teachers = await this.dataService.getTeachers();
-    
-  }
+  constructor(private dataService: DataService) {
+    this.teacher = new NewTeacher();
+   }
+
+   async addTeacher() {
+     await this.dataService.insertTeacher(this.teacher);
+
+     let options = {
+      title: "Teacher Added",
+      message: "Your teacher has been added",
+      okButtonText: "OK"
+  };
+  
+    alert(options);
+
+    this.teacher = new NewTeacher();
+   }
 
   async createTeachersTable() {
     await this.dataService.createTeachersTable();
