@@ -1,0 +1,5 @@
+{
+    "circleci": {
+        "sshRepositoryURL": "git@github.com:DJKullas/MeetingRecorder.git"
+    }
+}
