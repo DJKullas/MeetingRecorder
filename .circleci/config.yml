@@ -9,7 +9,7 @@ jobs:
   build:
     macos:
       xcode: "11.3"
-    working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/MeetingRecorder
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
