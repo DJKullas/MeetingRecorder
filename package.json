@@ -25,6 +25,7 @@
     "@angular/router": "~8.2.0",
     "@nativescript/theme": "~2.3.0",
     "@schematics/angular": "^9.1.8",
+    "fastlane": "^0.1.0",
     "nativescript-angular": "~8.21.0",
     "nativescript-remote-builds": "^1.1.1",
     "nativescript-sqlite": "^2.6.3",
