@@ -4,8 +4,7 @@ import { NewStudent } from '../models/new-student';
 
 @Component({
   selector: 'ns-add-student',
-  templateUrl: './add-student.component.html',
-  styleUrls: ['./add-student.component.css']
+  templateUrl: './add-student.component.html'
 })
 export class AddStudentComponent implements OnInit {
 
