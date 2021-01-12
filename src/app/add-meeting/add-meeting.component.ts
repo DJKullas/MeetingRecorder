@@ -9,8 +9,7 @@ import { NewMeeting } from '../models/new-meeting';
 
 @Component({
   selector: 'ns-add-meeting',
-  templateUrl: './add-meeting.component.html',
-  styleUrls: ['./add-meeting.component.css']
+  templateUrl: './add-meeting.component.html'
 })
 export class AddMeetingComponent implements OnInit {
 
