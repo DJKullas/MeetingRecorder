@@ -42,15 +42,16 @@ export class AddMeetingComponent implements OnInit {
   }
 
   public onSelectedStudentChanged(args: EventData) {
-    const picker = <ListPicker>args.object;
-    this.meeting.studentId = this.students[picker.selectedIndex].id;
-    
-}
+      const picker = <ListPicker>args.object;
+      this.meeting.studentId = this.students[picker.selectedIndex].id;
+    } 
 
-public onSelectedTeacherChanged(args: EventData) {
-  const picker = <ListPicker>args.object;
-  this.meeting.teacherId = this.teachers[picker.selectedIndex].id;
-}
+
+  public onSelectedTeacherChanged(args: EventData) {
+    const picker = <ListPicker>args.object;
+    this.meeting.teacherId = this.teachers[picker.selectedIndex].id;
+  } 
+
 
 public onDateChanged(args) {
   this.meeting.date = args.value;
@@ -70,10 +71,6 @@ public onDateLoaded(args) {
   };
   
     alert(options);
-  }
-
-  async deleteMeetingsTable() {
-    await this.dataService.dropMeetingsTable();
   }
 
   ngOnInit(): void {

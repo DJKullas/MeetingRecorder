@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Meeting } from '../models/meeting';
 import { DataService } from '../data.service';
+import { ɵDomAdapter } from '@angular/platform-browser';
 
 @Component({
   selector: 'ns-show-meetings',
@@ -15,6 +16,7 @@ export class ShowMeetingsComponent implements OnInit {
   }
 
 async getMeetings() {
+  console.log("in get meetings")
   await this.dataService.getMeetings();
   this.meetings.sort(function(a,b): any{
     return (new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -22,7 +24,9 @@ async getMeetings() {
 }
 
   ngOnInit(): void {
-    this.dataService.sharedMeetings.subscribe(meetings => this.meetings = meetings);
+    this.dataService.sharedMeetings.subscribe(meetings => this.meetings = meetings.sort(function(a,b): any{
+      return (new Date(b.date).getTime() - new Date(a.date).getTime());
+    }));
     this.getMeetings();
   }
 }

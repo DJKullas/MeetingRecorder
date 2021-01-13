@@ -4,9 +4,9 @@
         <ListView height="100%" [items]="meetings">
             <ng-template let-meeting="item" let-i="index">
                 <StackLayout orientation="horizontal">
-                    <Label width="33%" [text]="meeting.student.fullName"></Label>
-                    <Label width="33%" [text]="meeting.teacher.fullName"></Label>
-                    <Label width="33%" [text]="meeting.date"></Label>
+                    <Label class="meetings-list-item" width="33%" [text]="meeting.student.fullName"></Label>
+                    <Label class="meetings-list-item" width="33%" [text]="meeting.teacher.fullName"></Label>
+                    <Label class="meetings-list-item" width="33%" [text]="meeting.dateString"></Label>
                 </StackLayout>
             </ng-template>
         </ListView>

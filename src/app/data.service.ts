@@ -67,13 +67,29 @@ export class DataService {
         });
     }
 
-    public async dropMeetingsTable(): Promise<any> {
-        this.database.execSQL("DROP TABLE meetings").then(id => {
+    // public async dropMeetingsTable(): Promise<any> {
+    //     this.database.execSQL("DROP TABLE meetings").then(id => {
             
-        }), error => {
+    //     }), error => {
             
-        };
-    }
+    //     };
+    // }
+
+    // public async dropStudentsTable(): Promise<any> {
+    //     this.database.execSQL("DROP TABLE students").then(id => {
+            
+    //     }), error => {
+            
+    //     };
+    // }
+
+    // public async dropTeachersTable(): Promise<any> {
+    //     this.database.execSQL("DROP TABLE teachers").then(id => {
+            
+    //     }), error => {
+            
+    //     };
+    // }
 
     public async createTeachersTable(): Promise<any> {
         this.database.execSQL("CREATE TABLE IF NOT EXISTS teachers (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT, title TEXT)").then(id => {
@@ -125,7 +141,7 @@ export class DataService {
         student = await this.database.get('select * from students where id=?', id, function(err, row) {
             
           });
-
+console.log(".workkkkk" + student + "id: " + id)
           return new Student(student[0], student[1], student[2], student[3]);
     }
 
@@ -149,6 +165,10 @@ export class DataService {
                 var teacher: Teacher;
 
                 console.log("Before awaits");
+                console.log(rows[row][0]);
+                console.log(rows[row][1]);
+                console.log(rows[row][2]);
+                console.log(rows[row][3]);
                 student = await this.getStudent(rows[row][2]);
                 teacher = await this.getTeacher(rows[row][3]);
                 console.log("After awaits")
