@@ -6,8 +6,7 @@ import { DataService } from '../data.service';
 
 @Component({
   selector: 'ns-meeting',
-  templateUrl: './meeting.component.html',
-  styleUrls: ['./meeting.component.css']
+  templateUrl: './meeting.component.html'
 })
 export class MeetingComponent implements OnInit {
 
