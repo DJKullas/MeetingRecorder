@@ -60,7 +60,7 @@ export class DataService {
     }
 
     public insertMeeting(meeting: NewMeeting) {
-        this.database.execSQL("INSERT INTO meetings (date, studentID, teacherID) VALUES (?, ?, ?)", [meeting.date, meeting.studentId, meeting.teacherId]).then(id => {
+        this.database.execSQL("INSERT INTO meetings (date, studentID, teacherID, details) VALUES (?, ?, ?, ?)", [meeting.date, meeting.studentId, meeting.teacherId, meeting.details]).then(id => {
             this.getMeetings();
         }, error => {
             
@@ -105,6 +105,14 @@ export class DataService {
         }), error => {
             
         };
+    }
+
+    public async addDetailsColumnToMeetings(): Promise<any> {
+        this.database.execSQL("ALTER TABLE meetings ADD COLUMN details TEXT").then(id => {
+
+        }, error => {
+            console.log("Already added details column");
+        });
     }
 
     public async getStudents(): Promise<Student[]> {
@@ -160,7 +168,7 @@ console.log(".workkkkk" + student + "id: " + id)
 
         });
 
-        return new Meeting(meeting[0], meeting[1], await this.getStudent(meeting[2]), await this.getTeacher(meeting[3]));
+        return new Meeting(meeting[0], meeting[1], await this.getStudent(meeting[2]), await this.getTeacher(meeting[3]), meeting[4]);
     }
 
     public async getMeetings(): Promise<Meeting[]> {
@@ -178,13 +186,14 @@ console.log(".workkkkk" + student + "id: " + id)
                 console.log(rows[row][1]);
                 console.log(rows[row][2]);
                 console.log(rows[row][3]);
+                console.log(rows[row][4]);
                 student = await this.getStudent(rows[row][2]);
                 teacher = await this.getTeacher(rows[row][3]);
                 console.log("After awaits")
                 
                 
 
-                this.meetings.push(new Meeting(rows[row][0], rows[row][1], student, teacher));
+                this.meetings.push(new Meeting(rows[row][0], rows[row][1], student, teacher, rows[row][4]));
             }
             console.log("MORE")
         }, error => {

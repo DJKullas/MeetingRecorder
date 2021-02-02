@@ -25,6 +25,7 @@ export class AddMeetingComponent implements OnInit {
 
   async createMeetingsTable() {
     await this.dataService.createMeetingsTable();
+    await this.dataService.addDetailsColumnToMeetings();
   }
 
   // make listpicker show names but return id
@@ -70,6 +71,7 @@ public onDateLoaded(args) {
       okButtonText: "OK"
   };
   
+    this.meeting.details = "";
     alert(options);
   }
 

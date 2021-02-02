@@ -23,6 +23,11 @@
         <DatePicker class="date-picker" (loaded)="onDateLoaded($event)" (dateChange)="onDateChanged($event)" ></DatePicker>
     </StackLayout>
 
+    <StackLayout visibility="{{ students.length > 0 && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-field">
+        <Label class="input-title" text="Enter Details" textAlignment="center"></Label>
+        <TextField [(ngModel)]="this.meeting.details" hint="Enter Details"></TextField>
+    </StackLayout>
+
     <StackLayout visibility="{{ students.length > 0 && teachers.length > 0 ? 'visible' : 'collapsed' }}">
         <Button class="btn btn-primary" text="Create" (tap)="createMeeting()"></Button>
     </StackLayout>

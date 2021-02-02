@@ -7,6 +7,7 @@ export class Meeting {
     private _student: Student;
     private _teacher: Teacher;
     private _dateString: string;
+    private _details: string;
 
     public get id(): number {
         return this._id;
@@ -42,13 +43,22 @@ export class Meeting {
         this._dateString = value;
     }
 
-    constructor(id: number, date: Date, student: Student, teacher: Teacher) {
+    public get details(): string {
+        return this._details;
+    }
+
+    public set details(value: string) {
+        this._details = value;
+    }
+
+    constructor(id: number, date: Date, student: Student, teacher: Teacher, details: string) {
         this.id = id;
         this.date = date;
         this.student = student;
         this.teacher = teacher;
         var tempDate = new Date(date);
         this.dateString = (tempDate.getMonth() + 1) + "/" + tempDate.getDate() + "/" + tempDate.getFullYear();
+        this.details = details;
     }
 
 }

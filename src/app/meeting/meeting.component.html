@@ -1,25 +1,21 @@
 <StackLayout class="form">
     <StackLayout>
-        <Label class="page-title" text="Add a Student" textAlignment="center"></Label>
+        <Label class="page-title" text="Meeting" textAlignment="center"></Label>
     </StackLayout>
-    
-    <StackLayout class="input-field">
-        <Label class="input-title" text="First Name" textAlignment="center"></Label>
-        
+ 
+    <StackLayout class="meeting-field">
+        <Label class="meeting-data" [text]="studentName + ', ' + studentGrade" textAlignment="center"></Label>
     </StackLayout>
   
-    <StackLayout class="input-field">
-        <Label class="input-title" text="Last Name" textAlignment="center"></Label>
-        
+    <StackLayout class="meeting-field">
+        <Label class="meeting-data" [text]="teacherName + ', ' + teacherTitle" textAlignment="center"></Label>
     </StackLayout>
-
-    <StackLayout class="input-field">
-        <Label class="input-title" text="Grade" textAlignment="center"></Label>
-       
+   
+    <StackLayout class="meeting-field">
+        <Label class="meeting-data" [text]="date" textAlignment="center"></Label>
     </StackLayout>
-
-    <StackLayout class="input-field">
-        <Label class="input-title" text="Grade" textAlignment="center"></Label>
-       
+   
+    <StackLayout class="meeting-field">
+        <TextView editable="false" class="meeting-data" [text]="details" textAlignment="center"></TextView>
     </StackLayout>
   </StackLayout>
