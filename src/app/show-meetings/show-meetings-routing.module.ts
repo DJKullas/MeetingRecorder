@@ -5,7 +5,7 @@ import { ShowMeetingsComponent } from './show-meetings.component';
 
 
 const routes: Routes = [
-  { path: "default", component: ShowMeetingsComponent }
+  { path: "default", component: ShowMeetingsComponent },
 ];
 
 @NgModule({

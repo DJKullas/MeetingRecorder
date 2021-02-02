@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NSEmptyOutletComponent } from "nativescript-angular";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { MeetingComponent } from "./meeting/meeting.component";
 
 const routes: Routes = [
     {
@@ -33,6 +34,11 @@ const routes: Routes = [
         component: NSEmptyOutletComponent,
         loadChildren: () => import("~/app/add-teacher/add-teacher.module").then((m) => m.AddTeacherModule),
         outlet: "addTeacherTab"
+    },
+    {
+        path: "meeting/:id",
+        component: MeetingComponent,
+        outlet: "showMeetingsTab"
     }
 ];
 

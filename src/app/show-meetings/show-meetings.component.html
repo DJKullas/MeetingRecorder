@@ -3,7 +3,7 @@
         <Label textAlignment="center" class="page-title" text="Meetings"></Label>
         <ListView height="100%" [items]="meetings">
             <ng-template let-meeting="item" let-i="index">
-                <StackLayout orientation="horizontal">
+                <StackLayout [nsRouterLink]="['', { outlets: { showMeetingsTab: ['meeting', meeting.id] } }]" orientation="horizontal" >       
                     <Label class="meetings-list-item" width="33%" [text]="meeting.student.fullName"></Label>
                     <Label class="meetings-list-item" width="33%" [text]="meeting.teacher.fullName"></Label>
                     <Label class="meetings-list-item" width="33%" [text]="meeting.dateString"></Label>

@@ -154,6 +154,15 @@ console.log(".workkkkk" + student + "id: " + id)
           return new Teacher(teacher[0], teacher[1], teacher[2], teacher[3]);
     }
 
+    public async getMeeting(id: number): Promise<Meeting> {
+        var meeting: Meeting;
+        meeting = await this.database.get('select * from meetings where id=?', id, function(err, row) {
+
+        });
+
+        return new Meeting(meeting[0], meeting[1], await this.getStudent(meeting[2]), await this.getTeacher(meeting[3]));
+    }
+
     public async getMeetings(): Promise<Meeting[]> {
         this.meetings = [];
         console.log("IN")

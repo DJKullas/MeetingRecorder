@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { Meeting } from '../models/meeting';
 import { DataService } from '../data.service';
 import { ɵDomAdapter } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ns-show-meetings',
