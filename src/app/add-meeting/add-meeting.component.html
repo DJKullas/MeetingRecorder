@@ -1,34 +1,25 @@
 
-<StackLayout class="form">
+<ScrollView height="100%" class="form">
     <StackLayout>
         <Label class="page-title" text="Create a Meeting" textAlignment="center"></Label>
-    </StackLayout>
+        
+        <Label visibility="{{ students != null && students != undefined && students.length > 0 ? 'visible' : 'collapsed' }}" class="input-title"
+            text="Select Student" textAlignment="center"></Label>
+       <ListPicker visibility="{{ students != null && students != undefined && students.length > 0 ? 'visible' : 'collapsed' }}"
+       class="input list-picker" [items]="students" textfield="fullName" valuefield="id" (selectedIndexChange)="onSelectedStudentChanged($event)">
+       </ListPicker>
     
-    <StackLayout visibility="{{ students != null && students != undefined && students.length > 0 ? 'visible' : 'collapsed' }}" class="input-field">
-        <Label class="input-title" text="Select Student" textAlignment="center"></Label>
-        <ListPicker 
-        class="input list-picker" [items]="students" textfield="fullName" valuefield="id" (selectedIndexChange)="onSelectedStudentChanged($event)">
-        </ListPicker>
-    </StackLayout>
-  
-    <StackLayout visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-field">
-        <Label class="input-title" text="Select Teacher" textAlignment="center"></Label>
-        <ListPicker 
+        <Label visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-title" text="Select Teacher" textAlignment="center"></Label>
+        <ListPicker visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}" 
         class="input list-picker" [items]="teachers" textfield="fullName" valuefield="id" (selectedIndexChange)="onSelectedTeacherChanged($event)">
         </ListPicker>
-    </StackLayout>
+ 
+        <Label visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-title" text="Select Date" textAlignment="center"></Label>
+        <DatePicker visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}"  class="date-picker" (loaded)="onDateLoaded($event)" (dateChange)="onDateChanged($event)" ></DatePicker>
 
-    <StackLayout visibility="{{ students.length > 0 && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-field">
-        <Label class="input-title" text="Select Date" textAlignment="center"></Label>
-        <DatePicker class="date-picker" (loaded)="onDateLoaded($event)" (dateChange)="onDateChanged($event)" ></DatePicker>
-    </StackLayout>
+        <Label visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}"  class="input-title" text="Enter Details" textAlignment="center"></Label>
+        <TextField visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}" [(ngModel)]="this.meeting.details" hint="Enter Details"></TextField>
 
-    <StackLayout visibility="{{ students.length > 0 && teachers.length > 0 ? 'visible' : 'collapsed' }}" class="input-field">
-        <Label class="input-title" text="Enter Details" textAlignment="center"></Label>
-        <TextField [(ngModel)]="this.meeting.details" hint="Enter Details"></TextField>
+        <Button visibility="{{ teachers != null && teachers != undefined && teachers.length > 0 ? 'visible' : 'collapsed' }}"  class="btn btn-primary" text="Create" (tap)="createMeeting()"></Button>
     </StackLayout>
-
-    <StackLayout visibility="{{ students.length > 0 && teachers.length > 0 ? 'visible' : 'collapsed' }}">
-        <Button class="btn btn-primary" text="Create" (tap)="createMeeting()"></Button>
-    </StackLayout>
-  </StackLayout>
+  </ScrollView>
